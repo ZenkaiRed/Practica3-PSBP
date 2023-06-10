@@ -30,7 +30,7 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect
 server.port=9000
 ```
 
-Para iniciar el proyecto, es recomendable utilizar una IDE como IntelliJ para correr de manera correcta el proyecto de Spring con Maven.
+Para iniciar el proyecto, es necesario utilizar una IDE como IntelliJ para correr de manera correcta el proyecto de Spring con Maven. Para correr el proyecto es necesario ejecutar el método main de la clase "Practica3Application", no sin antes esperar que las dependencias del proyecto estén completamente instaladas.
 
 ## Archivo JSON de Postman
 
