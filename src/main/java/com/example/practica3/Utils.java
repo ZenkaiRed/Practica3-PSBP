@@ -1,7 +1,9 @@
 package com.example.practica3;
 
 import com.example.practica3.entities.Reserve;
-import java.util.Calendar;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -22,21 +24,19 @@ public class Utils {
         return lastReserve;
     }
 
-    public static int countReserveLastMonth(List<Reserve> reserves) {
-        Calendar calendar = Calendar.getInstance(); // Obtener una instancia de Calendar
-        calendar.setTime(new Date()); // Establecer la fecha actual en el Calendar
+    public static int countReservesLastMonth(List<Reserve> reserves) {
 
-        int currentMonth = calendar.get(Calendar.MONTH); // Obtener el mes actual
-        int lastMonth = (currentMonth - 1 + 12) % 12; // Calcular el mes pasado teniendo en cuenta los meses del año
+        LocalDate today = LocalDate.now();
+        LocalDate oneMonthAgo = LocalDate.now().minusMonths(1);
 
         int count = 0;
 
         for (Reserve reserve : reserves) {
-            calendar.setTime(reserve.getReserved_at()); // Establecer la fecha de reserva en el Calendar
-            int reserveMonth = calendar.get(Calendar.MONTH); // Obtener el mes de la reserva
+            Date reserveDate = reserve.getReserved_at();
+            LocalDate localReserveDate = reserveDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            if (reserveMonth == lastMonth) {
-                count++; // Incrementar el contador si la reserva es del mes pasado
+            if (localReserveDate.isEqual(today) || (localReserveDate.isAfter(oneMonthAgo) && localReserveDate.isBefore(today.plusDays(1)))) {
+                count++;
             }
         }
 

@@ -60,7 +60,7 @@ public class PersonController extends BaseController<Person, PersonService> {
                 }
 
                 Reserve lastMonthReserve = Utils.lastReserve(personReserve);
-                int countLastMonthReserve = Utils.countReserveLastMonth(personReserve);
+                int countLastMonthReserve = Utils.countReservesLastMonth(personReserve);
 
                 if (lastMonthReserve != null){
                     personDto.setDate_last_reserve(lastMonthReserve.getReserved_at());
